@@ -65,7 +65,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     zip \
     wget \
-    zlib1g-dev
+    zlib1g-dev \
+    rbenv \
+    ruby-build
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
@@ -121,6 +123,9 @@ RUN npm config set user 0 \
     && npm install -g yarn  \
     && npm install -g puppeteer \
     && npm install -g --force @asciidoctor/core @asciidoctor/cli asciidoctor asciidoctor-pdf asciidoctor-katex asciidoctor-kroki gulp-cli vega vega-cli vega-lite vega-embed
+
+# Install Ruby 3.3.8
+RUN rbenv install -f -v 3.3.8
 
 WORKDIR /documents
 VOLUME /documents
